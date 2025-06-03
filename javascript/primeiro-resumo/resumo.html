@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo JavaScript - Estilo Sakura</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff0f5; /* LavenderBlush - um rosa bem clarinho */
+            color: #5c3c4c; /* Um tom de rosa escuro/roxo para texto */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFC0CB' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); /* Padrão sutil de "sakura" como background */
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 25px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(219, 112, 147, 0.2); /* Sombra rosa */
+            border: 1px solid #ffb6c1; /* LightPink */
+        }
+
+        h1, h2, h3 {
+            color: #db7093; /* PaleVioletRed */
+            border-bottom: 2px solid #ffdde1; /* Rosa bem clarinho para a linha */
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px #fff0f5;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #c71585; /* MediumVioletRed */
+            margin-top: 30px;
+        }
+
+        code {
+            background-color: #ffe4e1; /* MistyRose */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #8b0000; /* DarkRed */
+        }
+
+        pre {
+            background-color: #fff5f7; /* Rosa bem pálido */
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px dashed #ffb6c1; /* LightPink */
+            box-shadow: inset 0 0 5px rgba(219, 112, 147, 0.1);
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        .comment-q { color: #007bff; font-style: italic; } /* Azul para ? */
+        .comment-e { color: #dc3545; font-weight: bold; } /* Vermelho para ! */
+        .comment-s { color: #28a745; } /* Verde para * */
+        .comment-n { color: #6c757d; } /* Cinza para // normal */
+
+        ul {
+            list-style-type: "🌸"; /* Usando emoji de sakura como marcador */
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .sakura-petal {
+            position: fixed;
+            background-color: #ffb7c5; /* Rosa das pétalas */
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            pointer-events: none; /* Para não interferir com cliques */
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 Resumo de JavaScript 🌸</h1>
+
+        <section>
+            <h2>Variáveis (<code>var</code>, <code>let</code>, <code>const</code>) e Escopo</h2>
+            <p>Variáveis guardam valores. O escopo define onde a variável é acessível.</p>
+            <ul>
+                <li><code>var</code>: Escopo de função ou global. Pode "vazar" de blocos. Menos usado hoje.</li>
+                <li><code>let</code>: Escopo de bloco (<code>{}</code>). Permite reatribuição.</li>
+                <li><code>const</code>: Escopo de bloco. Não permite reatribuição após a inicialização (deve ser inicializada).</li>
+            </ul>
+            <pre><code class="language-javascript">
+<span class="comment-n">// Exemplo</span>
+<span class="comment-q">// ? Escopo de Bloco com let e const</span>
+function exemploEscopo() {
+  if (true) {
+    let noBlocoLet = "Só existo no bloco if";
+    const noBlocoConst = "Também só no bloco if";
+    var noVar = "Eu vazo para a função!";
+    console.log(noBlocoLet);
+    console.log(noBlocoConst);
+  }
+  console.log(noVar); <span class="comment-s">// * OK</span>
+  <span class="comment-n">// console.log(noBlocoLet); // ERRO!</span>
+}
+exemploEscopo();
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Tipos de Dados</h2>
+            <h3>String</h3>
+            <p>Texto, declarado com aspas simples (<code>'</code>), duplas (<code>"</code>) ou crases (<code>`</code>).</p>
+            <pre><code class="language-javascript">
+var nome = 'Ana'; <span class="comment-s">// String</span>
+var frase = "It's Time"; <span class="comment-s">// String com apóstrofo dentro</span>
+var gols = 1000;
+var fraseCompleta = `Romário fez ${gols} gols`; <span class="comment-s">// Template Literal</span>
+var concatenacao = "Olá " + nome + "!"; <span class="comment-s">// Concatenação com +</span>
+
+console.log(fraseCompleta); <span class="comment-n">// Output: Romário fez 1000 gols</span>
+console.log(concatenacao);  <span class="comment-n">// Output: Olá Ana!</span>
+            </code></pre>
+
+            <h3>Number</h3>
+            <p>Números, sejam inteiros ou decimais. JS não distingue tipos inteiros e float na declaração.</p>
+            <pre><code class="language-javascript">
+var idade = 21; <span class="comment-s">// Number (inteiro)</span>
+var pi = 3.14;  <span class="comment-s">// Number (decimal)</span>
+var exp = 2e10; <span class="comment-s">// Number (20000000000)</span>
+var numeroEmString = '2003'; <span class="comment-s">// Isto é uma String, não um Number</span>
+            </code></pre>
+
+            <h3>Boolean</h3>
+            <p>Representa verdadeiro (<code>true</code>) ou falso (<code>false</code>).</p>
+            <pre><code class="language-javascript">
+var possuiGraduacao = true;
+var possuiDoutorado = false;
+            </code></pre>
+
+            <h3>Undefined</h3>
+            <p>Uma variável que foi declarada mas não teve um valor atribuído.</p>
+            <pre><code class="language-javascript">
+var empregoFuturo;
+console.log(empregoFuturo); <span class="comment-n">// Output: undefined</span>
+            </code></pre>
+
+            <h3>Null</h3>
+            <p>Representa a ausência intencional de um valor de objeto.</p>
+            <pre><code class="language-javascript">
+var carro = null; <span class="comment-s">// Intencionalmente sem valor</span>
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Operadores</h2>
+            <h3>Operadores Aritméticos</h3>
+            <p>Realizam operações matemáticas.</p>
+            <pre><code class="language-javascript">
+var soma = 100 + 50; <span class="comment-n">// 150</span>
+var subtracao = 100 - 50; <span class="comment-n">// 50</span>
+var multiplicacao = 100 * 2; <span class="comment-n">// 200</span>
+var divisao = 100 / 2; <span class="comment-n">// 50</span>
+var expoente = 2 ** 4; <span class="comment-n">// 16</span>
+var modulo = 14 % 5; <span class="comment-n">// 4 (resto da divisão)</span>
+            </code></pre>
+
+            <h3>Operadores Aritméticos com Strings (Coerção)</h3>
+            <p>O JS tenta converter strings para números em operações matemáticas (exceto para <code>+</code>, que prioriza concatenação se houver string).</p>
+            <pre><code class="language-javascript">
+var somaStr = '100' + 50;        <span class="comment-n">// '10050' (concatenação)</span>
+var subtracaoStr = '100' - 50;   <span class="comment-n">// 50 (número) - '100' é convertido para 100</span>
+var multStr = '100' * '2';     <span class="comment-n">// 200 (número) - ambos convertidos</span>
+var divStrErrada = 'Comprei 10' / 2; <span class="comment-n">// NaN (Not a Number)</span>
+
+console.log(divStrErrada); <span class="comment-n">// NaN</span>
+console.log(isNaN(divStrErrada)); <span class="comment-n">// true</span>
+            </code></pre>
+
+            <h3>NaN (Not a Number)</h3>
+            <p>Resultado de uma operação numérica inválida.</p>
+            <pre><code class="language-javascript">
+var tentativa = 'texto' / 2; <span class="comment-n">// NaN</span>
+            </code></pre>
+
+            <h3>Ordem dos Operadores (Precedência)</h3>
+            <p>Multiplicação/Divisão primeiro, depois Soma/Subtração. Use parênteses <code>()</code> para priorizar.</p>
+            <pre><code class="language-javascript">
+var total1 = 20 + 5 * 2; <span class="comment-n">// 30 (5*2=10, depois 20+10=30)</span>
+var total2 = (20 + 5) * 2; <span class="comment-n">// 50 (20+5=25, depois 25*2=50)</span>
+            </code></pre>
+
+            <h3>Operadores Unários</h3>
+            <p>Incremento (<code>++</code>), decremento (<code>--</code>), e conversão para número (<code>+</code>, <code>-</code>).</p>
+            <pre><code class="language-javascript">
+var incremento = 5;
+console.log(incremento++); <span class="comment-n">// 5 (retorna o valor original, DEPOIS incrementa para 6)</span>
+console.log(incremento);   <span class="comment-n">// 6</span>
+
+var incremento2 = 5;
+console.log(++incremento2); <span class="comment-n">// 6 (PRIMEIRO incrementa para 6, depois retorna o valor)</span>
+console.log(incremento2);   <span class="comment-n">// 6</span>
+
+var idadeStr = '28';
+var idadeNum = +idadeStr; <span class="comment-n">// 28 (número) - Converte a string para número</span>
+console.log(idadeNum + 5); <span class="comment-n">// 33</span>
+
+var fraseTeste = 'Isso é um teste';
+console.log(+fraseTeste); <span class="comment-n">// NaN (não consegue converter para número)</span>
+
+var boolVerdadeiro = true;
+console.log(+boolVerdadeiro); <span class="comment-n">// 1 (true vira 1, false vira 0)</span>
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Truthy e Falsy</h2>
+            <p>Em contextos booleanos (como um <code>if</code>), valores podem se comportar como <code>true</code> (truthy) ou <code>false</code> (falsy).</p>
+            <p><strong>Falsy Values:</strong> <code>false</code>, <code>0</code>, <code>-0</code>, <code>""</code> (string vazia), <code>null</code>, <code>undefined</code>, <code>NaN</code>.</p>
+            <p>Todos os outros valores são truthy.</p>
+            <pre><code class="language-javascript">
+var nomeTruthy = 'Andre';        <span class="comment-n">// Truthy</span>
+var possuiDoutoradoFalsy = false; <span class="comment-n">// Falsy</span>
+var empregoFuturoFalsy;        <span class="comment-n">// undefined -> Falsy</span>
+var dinheiroNaContaFalsy = 0;  <span class="comment-n">// Falsy</span>
+
+if (nomeTruthy) {
+  console.log("Nome é truthy");
+}
+if (!dinheiroNaContaFalsy) {
+  console.log("Dinheiro na conta é falsy");
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Operadores Lógicos (<code>&&</code> e <code>||</code>)</h2>
+            <p><code>&&</code> (E lógico): Retorna o primeiro valor falsy que encontrar, ou o último valor se todos forem truthy.</p>
+            <p><code>||</code> (OU lógico): Retorna o primeiro valor truthy que encontrar, ou o último valor se todos forem falsy.</p>
+            <pre><code class="language-javascript">
+<span class="comment-q">// ? Exemplo de &&</span>
+if (('Gato' === 'gato') && (5 > 2)) { <span class="comment-n">// false && true -> false</span>
+  console.log('Verdadeiro');
+} else {
+  console.log('Falso'); <span class="comment-s">// * Este será impresso</span>
+}
+
+<span class="comment-q">// ? Exemplo de || e retorno de valor do &&</span>
+if (('Gato' === 'gato') || (5 > 2)) { <span class="comment-n">// false || true -> true</span>
+  console.log('Gato' && 'Cão'); <span class="comment-n">// 'Gato' é truthy, então && retorna 'Cão'</span>
+                               <span class="comment-s">// * 'Cão' será impresso</span>
+} else {
+  console.log('Falso');
+}
+
+var expressao = (5 - 2) && (5 - ' ') && (5 - 4);
+<span class="comment-n">// (3) && (5 - 0 -> 5) && (1)</span>
+<span class="comment-n">// 3 (truthy) -> continua</span>
+<span class="comment-n">// 5 (truthy) -> continua</span>
+<span class="comment-n">// Retorna o último valor truthy: 1</span>
+console.log(expressao); <span class="comment-n">// 1</span>
+            </code></pre>
+            <div class="user-reflection">
+                <h3><span class="comment-n">// ! Minha Observação sobre Truthy/Falsy e Operadores Lógicos:</span></h3>
+                <p><span class="comment-e">!</span> Eu geralmente NÃO usaria (ou usaria com muita cautela e apenas em casos simples e idiomáticos) o comportamento de <code>&&</code> e <code>||</code> de retornar o valor de um dos operandos quando:</p>
+                <ul>
+                    <li><span class="comment-s">*</span> A intenção principal não é simplesmente obter um valor booleano para um <code>if</code>.</li>
+                    <li><span class="comment-s">*</span> A cadeia de operandos é longa e complexa.</li>
+                    <li><span class="comment-s">*</span> A legibilidade do código ficaria comprometida.</li>
+                </ul>
+                <p><span class="comment-s">*</span> Casos onde o retorno do operando (truthy/falsy) é aceitável e comum:</p>
+                <ul>
+                    <li>Valores padrão com <code>||</code>:
+                        <pre><code>const nomeExemplo = nomeUsuario || "Convidado";
+<span class="comment-n">// Se nomeUsuario for truthy, 'nomeExemplo' recebe nomeUsuario.</span>
+<span class="comment-n">// Se nomeUsuario for falsy, 'nomeExemplo' recebe "Convidado".</span></code></pre>
+                        <span class="comment-e">!</span> Isso é claro e amplamente entendido. (Lembrando do <code>??</code> como alternativa moderna para <code>null</code> ou <code>undefined</code>).
+                    </li>
+                    <li><span class="comment-q">?</span> "Curto-circuito" para chamada de função com <code>&&</code>:
+                        <pre><code>usuarioAtivo && enviarNotificacao(usuarioAtivo.id);
+<span class="comment-n">// Se usuarioAtivo for truthy, a função enviarNotificacao é chamada.</span>
+<span class="comment-n">// Se usuarioAtivo for falsy, nada acontece depois do &&.</span>
+<span class="comment-n">// Isso é um atalho para if (usuarioAtivo) { enviarNotificacao(usuarioAtivo.id); }. É conciso para casos simples.</span></code></pre>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Estruturas Condicionais (<code>if / else if / else</code>)</h2>
+            <p>Permitem executar blocos de código baseados em condições.</p>
+            <pre><code class="language-javascript">
+var idadeAna = 21;
+var idadeParente = 25;
+
+if (idadeAna > idadeParente) {
+    console.log('É maior');
+} else if (idadeAna === idadeParente) { <span class="comment-s">// * Use === para comparação estrita (valor E tipo)</span>
+    console.log('É igual');
+} else { <span class="comment-n">// Se não é maior nem igual, só pode ser menor</span>
+    console.log('É menor');
+}
+            </code></pre>
+        </section>
+
+    </div>
+
+    <script>
+        // Script para adicionar algumas pétalas de sakura caindo (efeito visual simples)
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('sakura-petal');
+
+            const size = Math.random() * 10 + 5; // Tamanho entre 5px e 15px
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size / 1.5}px`; // Um pouco mais achatada
+
+            petal.style.left = `${Math.random() * 100}vw`; // Posição horizontal aleatória
+            petal.style.animationDuration = `${Math.random() * 5 + 5}s`; // Duração da queda entre 5s e 10s
+            petal.style.animationDelay = `${Math.random() * 3}s`; // Atraso para começar a cair
+
+            // Angulo da pétala (simulando formato)
+            const angle = Math.random() * 60 - 30; // Pequena variação
+            petal.style.transform = `rotate(${angle}deg)`;
+
+
+            document.body.appendChild(petal);
+
+            // Remove a pétala depois que ela cai para não sobrecarregar o DOM
+            setTimeout(() => {
+                petal.remove();
+            }, 10000); // Tempo um pouco maior que a maior duração da animação
+        }
+
+        // Criar algumas pétalas
+        for (let i = 0; i < 25; i++) { // Número de pétalas
+            createPetal();
+        }
+    </script>
+</body>
+</html>
