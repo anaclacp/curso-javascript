@@ -15,7 +15,7 @@ var quadrado = {
     },
     perimetro: function(lado) {
         return this.lados * lado;
-    }
+    } // ? para não precisar repetir a variável, usamos o 'this', em outras palavras ele é usado para referenciar o objeto atual, nesse caso, o quadrado.
 }
 
 // ? 'Lados' é uma propriedade do objeto quadrado, um quadrado tem 4 lados.
@@ -24,3 +24,16 @@ var quadrado = {
 console.log(quadrado.lados); 
 console.log(quadrado.area(5)); 
 console.log(quadrado.perimetro(5)); 
+
+// ? Abreviação para criar um meétodo, exemplo da área: area: function () {} para area() {}
+// ! Exemplo: 
+var quadrado = {
+    lados: 4,
+    area (lado) {
+        return lado * lado;
+    },
+    perimetro (lado) {
+        return this.lados * lado;
+    }
+}
+// ! Funciona da mesma forma que o anterior, mas com uma sintaxe mais curta.
