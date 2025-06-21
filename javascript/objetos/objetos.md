@@ -34,6 +34,7 @@ console.log(pessoa.possuiFaculdade);
   ```javascript
   var quadrado = {
       lados: 4 
+  }
   ```
 
 - **Método**: É uma propriedade cujo valor é uma função, ou seja, uma ação do objeto.  
