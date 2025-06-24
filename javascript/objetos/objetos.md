@@ -63,7 +63,4 @@ console.log(pessoa.possuiFaculdade);
 
 > console.table(quadrado); Exibe o objeto quadrado em uma tabela no console, facilitando a visualização das propriedades e métodos.
 
----
-
-## Criar um objeto
-# Um objeto é criado usando as chaves {}
+### Um objeto é criado usando as chaves {}
