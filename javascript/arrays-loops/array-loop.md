@@ -40,6 +40,7 @@ while (i < 10) {
     i++;
 }
 ```
+---
 
 ### Interação de arrays com loops
 
@@ -53,4 +54,45 @@ for(var item = 0; item < videoGames.length; item++){
 
 > Esse exemplo é um loop no array, ele usou `videoGames.length` para pegar a quantidade de itens do array e fazer um loop, e o console.log`(videoGames[item])` retorna os nomes dos itens no array.
 
+### Break 
 
+> O loop irá parar caso encontre a palavra `break`
+
+```javascript
+var videoGames = ['Switch', 'PS5', 'Xbox', '3DS'];
+
+for(var i = 0; i < videoGames.length; i++){
+    console.log(videoGames[i]);
+    if(videoGames[i] === 'PS5')
+    {
+        break;
+    }
+}
+```
+Isso quer dizer que se o item for o PS5, o loop irá parar.
+
+---
+
+### For Each 
+> `forEach` é um método que executa uma função para cada item do array. É uma forma mais simples de utilizarmos um loop com arrays
+
+```javascript
+var videoGames = ['Switch', 'PS5', 'Xbox', '3DS'];
+videoGames.forEach(function(item){
+    console.log(item);
+});
+```
+
+Podemos passar os seguintes parâmetros `item`, `index` e `array`. É um método mais comum atualmente para executar um loop. A função vai executar para cada item do array.
+
+### **Cuidado com a sintaxe**
+```javascript
+var numero = 0;
+var maximo = 50;
+
+for(;numero < maximo;){
+    console.log(numero);
+    numero++;
+}
+```
+Não é recomendado escrever como o exemplo acima. 
